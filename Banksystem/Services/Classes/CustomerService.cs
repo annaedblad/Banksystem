@@ -1,5 +1,7 @@
-﻿using Banksystem.Repositories.Interfaces;
+﻿using Banksystem.Models;
+using Banksystem.Repositories.Interfaces;
 using Banksystem.Services.Interfaces;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +20,12 @@ namespace Banksystem.Services.Classes
         {
             var amountCustomers = _customerrepository.GetCustomers().Count();
             return amountCustomers;
+        }
+
+        public Customers GetCustomerById(int id)
+        {
+            var customer = _customerrepository.GetCustomers().Where(o => o.CustomerId == id).FirstOrDefault();
+            return customer;
         }
     }
 }

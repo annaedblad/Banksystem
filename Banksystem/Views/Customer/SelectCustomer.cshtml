@@ -1,0 +1,18 @@
+﻿@model Banksystem.ViewModels.CustomerDetailsViewModel
+<h1>Kundbild</h1>
+
+@ViewBag.Message
+
+<form asp-controller="Customer" asp-action="SelectCustomer" asp-for="SelectCustomer" method="post">
+    <label>Ange kundnummer</label>
+    <input type="text" asp-for="CustomerId" />
+    <input type="submit" value="Vidare" />
+    <br />
+    <span asp-validation-for="CustomerId"></span>
+</form>
+
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

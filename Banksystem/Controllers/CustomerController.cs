@@ -6,6 +6,7 @@ using Banksystem.Models;
 using Banksystem.Services.Interfaces;
 using Banksystem.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 
 namespace Banksystem.Controllers
 {
@@ -26,6 +27,43 @@ namespace Banksystem.Controllers
             statistics.AmountOfCustomers = _customerService.TotalAmountOfCustomers();
             statistics.SumOfAccountBalances = _accountService.TotalAccountBalanceSum();
             return View(statistics);
+        }
+
+        public IActionResult SelectCustomer()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SelectCustomer(CustomerDetailsViewModel id)
+        {
+            if (ModelState.IsValid)
+            {
+                var customer = _customerService.GetCustomerById(id.CustomerId);
+                if (customer == null)
+                {
+                    ViewBag.Message = "Hittar ingen kund med det kundnumret";
+                    return View();
+                }
+                var customerModel = new CustomerDetailsViewModel
+                {
+                    Givenname = customer.Givenname,
+                    Surname = customer.Surname,
+                    Streetaddress = customer.Streetaddress,
+                    Zipcode = customer.Zipcode,
+                    City = customer.City,
+                    Birthday = customer.Birthday.ToString(),
+                    CountryCode = customer.Telephonecountrycode,
+                    Telephonenumber = customer.Telephonenumber,
+                    Emailaddress = customer.Emailaddress,
+                    Gender = customer.Gender,
+                    Country = customer.Country,
+                };
+                return View("CustomerDetails", customerModel);
+            }
+            return View();
+
         }
     }
 } 
