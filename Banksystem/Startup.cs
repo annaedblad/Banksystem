@@ -2,9 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Banksystem.Models;
+using Banksystem.Repositories.Classes;
+using Banksystem.Repositories.Interfaces;
+using Banksystem.Services.Classes;
+using Banksystem.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,7 +29,15 @@ namespace Banksystem
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<BankDBContext>(options =>
+            options.UseSqlServer(
+            Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllersWithViews();
+
+            services.AddTransient<IAccountRepository, AccountRepository>();
+            services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<ICustomerService, CustomerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
