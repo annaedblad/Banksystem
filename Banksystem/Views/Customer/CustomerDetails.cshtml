@@ -1,16 +1,27 @@
 ﻿@model Banksystem.ViewModels.CustomerDetailsViewModel
 
-<h3>Kund</h3>
-Namn: @Model.Givenname @Model.Surname
+<h3>Customer</h3>
+Name: @Model.Givenname @Model.Surname
 <br />
-Kön: @Model.Gender
+Gender: @Model.Gender
 <br />
-Födelsedag: @Model.Birthday
+Birthday: @Model.Birthday
 <br />
 Adress: @Model.Streetaddress , @Model.City , @Model.Zipcode , @Model.Country
 <br />
-Telefonnummer: + @Model.CountryCode  @Model.Telephonenumber
+Phone: + @Model.CountryCode  @Model.Telephonenumber
 <br />
-Emailadress: @Model.Emailaddress 
+Emailadress: @Model.Emailaddress
 <br />
-<h3>Konton</h3>
+<h3>Accounts</h3>
+<br />
+
+@foreach (var account in Model.ListOfAccounts)
+{
+    <p>Account number: @account.AccountId </p>
+    <p>Created: @account.Created </p>
+    <p>Frequency:  @account.Frequency </p>
+    <p>Balance: @account.Balance</p>
+}
+
+<h4>Total balace of all accounts: @Model.TotalBalance</h4>

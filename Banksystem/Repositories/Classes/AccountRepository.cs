@@ -1,5 +1,6 @@
 ﻿using Banksystem.Models;
 using Banksystem.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,12 @@ namespace Banksystem.Repositories.Classes
         public List<Accounts> GetAccounts()
         {
             return _bankDBContext.Accounts.ToList();
+        }
+
+        public IQueryable<Accounts> GetAccountsByCustomerId(int customerId)
+        {
+            var listOfAccountIds = _bankDBContext.Dispositions.Where(o => o.CustomerId == customerId).Select(x => x.AccountId);
+            return _bankDBContext.Accounts.Where(o => listOfAccountIds.Contains(o.AccountId));
         }
     }
 }

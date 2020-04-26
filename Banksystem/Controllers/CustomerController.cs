@@ -41,6 +41,7 @@ namespace Banksystem.Controllers
             if (ModelState.IsValid)
             {
                 var customer = _customerService.GetCustomerById(id.CustomerId);
+                var accounts = _accountService.ShowAccountDetails(id.CustomerId);
                 if (customer == null)
                 {
                     ViewBag.Message = "Hittar ingen kund med det kundnumret";
@@ -59,6 +60,8 @@ namespace Banksystem.Controllers
                     Emailaddress = customer.Emailaddress,
                     Gender = customer.Gender,
                     Country = customer.Country,
+                    TotalBalance = accounts.TotalBalance,
+                    ListOfAccounts = accounts.ListOfAccounts
                 };
                 return View("CustomerDetails", customerModel);
             }

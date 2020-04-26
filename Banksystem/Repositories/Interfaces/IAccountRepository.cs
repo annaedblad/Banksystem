@@ -9,5 +9,6 @@ namespace Banksystem.Repositories.Interfaces
     public interface IAccountRepository
     {
         List<Accounts> GetAccounts();
+        IQueryable<Accounts> GetAccountsByCustomerId(int customerId);
     }
 }

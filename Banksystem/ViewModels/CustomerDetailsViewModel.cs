@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Banksystem.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -26,6 +27,9 @@ namespace Banksystem.ViewModels
 
         public string Country { get; set; }
 
+        public decimal TotalBalance { get; set; }
+
+        public IQueryable<Accounts> ListOfAccounts { get; set; }
     }
 }
 

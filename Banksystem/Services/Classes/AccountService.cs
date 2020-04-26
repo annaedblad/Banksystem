@@ -2,6 +2,7 @@
 using Banksystem.Repositories.Classes;
 using Banksystem.Repositories.Interfaces;
 using Banksystem.Services.Interfaces;
+using Banksystem.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,9 +26,21 @@ namespace Banksystem.Services.Classes
 
         public decimal TotalAccountBalanceSum()
         {
-            var accounts = _accountRepository.GetAccounts().Select(o => o.Balance).ToList().Sum();
-            return accounts;
+            var balance = _accountRepository.GetAccounts().Select(o => o.Balance).ToList().Sum();
+            return balance;
 
+        }
+
+        public BalanceAndAccounts ShowAccountDetails (int customerId)
+        {
+            var accounts = _accountRepository.GetAccountsByCustomerId(customerId);
+            var balanceTotal = accounts.Sum(x => x.Balance);
+
+                return new BalanceAndAccounts
+                {
+                    TotalBalance = balanceTotal,
+                    ListOfAccounts = accounts
+                };
         }
     }
 }
