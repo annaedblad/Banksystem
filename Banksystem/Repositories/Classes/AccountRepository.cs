@@ -26,5 +26,10 @@ namespace Banksystem.Repositories.Classes
             var listOfAccountIds = _bankDBContext.Dispositions.Where(o => o.CustomerId == customerId).Select(x => x.AccountId);
             return _bankDBContext.Accounts.Where(o => listOfAccountIds.Contains(o.AccountId));
         }
+
+        public List<Transactions> GetTransactionsById(int id)
+        {
+            return _bankDBContext.Transactions.ToList();
+        }
     }
 }

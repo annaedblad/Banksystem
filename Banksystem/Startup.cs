@@ -29,6 +29,8 @@ namespace Banksystem
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
+            services.AddSession();
             services.AddDbContext<BankDBContext>(options =>
             options.UseSqlServer(
             Configuration.GetConnectionString("DefaultConnection")));
@@ -43,6 +45,7 @@ namespace Banksystem
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -57,7 +60,7 @@ namespace Banksystem
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession(new SessionOptions { IdleTimeout = new TimeSpan(0, 10, 0) });
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

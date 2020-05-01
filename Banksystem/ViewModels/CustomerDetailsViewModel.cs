@@ -18,9 +18,6 @@ namespace Banksystem.ViewModels
         public string Telephonenumber { get; set; }
         public string Emailaddress { get; set; }
         public string CountryCode { get; set; }
-
-        [Required (ErrorMessage = "Field is mandatory")]
-        [RegularExpression(@"(\s*[0-9]{0,6})", ErrorMessage = "Field must be a number")]
         public int CustomerId { get; set; }
 
         public string Gender { get; set; }

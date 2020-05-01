@@ -6,6 +6,8 @@ using Banksystem.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Cryptography.Xml;
 using System.Threading.Tasks;
 
 namespace Banksystem.Services.Classes
@@ -31,7 +33,7 @@ namespace Banksystem.Services.Classes
 
         }
 
-        public BalanceAndAccounts ShowAccountDetails (int customerId)
+        public BalanceAndAccounts ShowAccountsDetails (int customerId)
         {
             var accounts = _accountRepository.GetAccountsByCustomerId(customerId);
             var balanceTotal = accounts.Sum(x => x.Balance);
@@ -41,6 +43,12 @@ namespace Banksystem.Services.Classes
                     TotalBalance = balanceTotal,
                     ListOfAccounts = accounts
                 };
+        }
+
+        public List<Transactions> GetAccountTransactions(int accountId)
+        {
+            var currentAccount = _accountRepository.GetAccounts().Where(o => o.AccountId == accountId).FirstOrDefault().AccountId;
+            return _accountRepository.GetTransactionsById(currentAccount);
         }
     }
 }

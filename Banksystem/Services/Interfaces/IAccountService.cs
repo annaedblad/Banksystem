@@ -13,6 +13,8 @@ namespace Banksystem.Services.Interfaces
 
         decimal TotalAccountBalanceSum();
 
-        BalanceAndAccounts ShowAccountDetails(int customerId);
+        BalanceAndAccounts ShowAccountsDetails(int customerId);
+
+        List<Transactions> GetAccountTransactions(int accountId);
     }
 }

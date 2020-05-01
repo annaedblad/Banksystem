@@ -1,0 +1,11 @@
+﻿@model Banksystem.ViewModels.AccountTransactions
+
+<h3>Detailed information</h3>
+
+@foreach (var item in Model.ListOfTransactions)
+{
+    <br />
+    @item.Date
+    @item.Amount
+
+}

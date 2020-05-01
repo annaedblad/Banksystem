@@ -1,0 +1,55 @@
+﻿@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core.Common
+@model IEnumerable<Banksystem.ViewModels.SearchParametersViewModel>
+
+<h1>Search results</h1>
+
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("SearchResults", new { page = page }),
+new X.PagedList.Mvc.Core.Common.PagedListRenderOptions
+{
+DisplayItemSliceAndTotal = true,
+ContainerDivClasses = new[] { "navigation" },
+LiElementClasses = new[] { "page-item" },
+PageClasses = new[] { "page-link" },
+})
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Customer id</th>
+            <th scope="col">Name</th>
+            <th scope="col">City</th>
+            <th scope="col">Adress</th>
+            <th scope="col">National identification number</th>
+            <th scope="col">Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var person in Model)
+        {
+            <tr>
+                <td>@person.CustomerId</td>
+                <td>@person.Name</td>
+                <td>@person.City</td>
+                <td>@person.Adress</td>
+                <td>@person.NationalId</td>
+                <td>
+                    <a asp-controller="Customer" asp-action="CustomerDetails" asp-route-id="@person.CustomerId">
+                        View
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('ul.pagination > li.disabled > a').addClass('page-link');
+        });
+    </script>
+
+}
