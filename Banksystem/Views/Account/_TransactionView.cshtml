@@ -1,0 +1,23 @@
+﻿@model List<Transactions>
+
+@if (Model == null)
+{
+    <td>
+        @ViewBag.Message
+    </td>
+}
+
+else
+{
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Date</td>
+            <td>@item.Type</td>
+            <td>@item.Amount</td>
+            <td>@item.Balance</td>
+        </tr>
+    }
+
+}
+

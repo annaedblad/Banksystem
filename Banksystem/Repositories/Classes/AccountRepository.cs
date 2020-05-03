@@ -1,5 +1,6 @@
 ﻿using Banksystem.Models;
 using Banksystem.Repositories.Interfaces;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace Banksystem.Repositories.Classes
     public class AccountRepository : IAccountRepository
     {
         private readonly BankDBContext _bankDBContext;
-        public AccountRepository (BankDBContext context)
+        public AccountRepository(BankDBContext context)
         {
             _bankDBContext = context;
         }
@@ -27,9 +28,9 @@ namespace Banksystem.Repositories.Classes
             return _bankDBContext.Accounts.Where(o => listOfAccountIds.Contains(o.AccountId));
         }
 
-        public List<Transactions> GetTransactionsById(int id)
+        public List<Transactions> GetTransactionsById(int id, int skip)
         {
-            return _bankDBContext.Transactions.ToList();
+            return _bankDBContext.Transactions.Where(x => x.AccountId == id).OrderByDescending(x => x.Date).Skip(skip).Take(20).ToList();
         }
     }
 }

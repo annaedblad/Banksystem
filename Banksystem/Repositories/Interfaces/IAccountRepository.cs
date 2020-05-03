@@ -11,6 +11,6 @@ namespace Banksystem.Repositories.Interfaces
         List<Accounts> GetAccounts();
         IQueryable<Accounts> GetAccountsByCustomerId(int customerId);
 
-        List<Transactions> GetTransactionsById(int id);
+        List<Transactions> GetTransactionsById(int id, int skip);
     }
 }

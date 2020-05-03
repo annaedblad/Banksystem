@@ -15,6 +15,6 @@ namespace Banksystem.Services.Interfaces
 
         BalanceAndAccounts ShowAccountsDetails(int customerId);
 
-        List<Transactions> GetAccountTransactions(int accountId);
+        List<Transactions> GetAccountTransactions(int accountId, int skip);
     }
 }

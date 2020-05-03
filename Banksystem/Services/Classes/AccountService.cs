@@ -45,10 +45,9 @@ namespace Banksystem.Services.Classes
                 };
         }
 
-        public List<Transactions> GetAccountTransactions(int accountId)
+        public List<Transactions> GetAccountTransactions(int accountId, int skip)
         {
-            var currentAccount = _accountRepository.GetAccounts().Where(o => o.AccountId == accountId).FirstOrDefault().AccountId;
-            return _accountRepository.GetTransactionsById(currentAccount);
+            return _accountRepository.GetTransactionsById(accountId, skip);
         }
     }
 }

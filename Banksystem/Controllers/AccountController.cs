@@ -15,11 +15,26 @@ namespace Banksystem.Controllers
         {
             _accountService = account;
         }
-        public IActionResult AccountTransactionDetails(int accountId)
+        public IActionResult AccountTransactionDetails(int accountId, int skip)
         {
             var detailModel = new AccountTransactions();
-            detailModel.ListOfTransactions = _accountService.GetAccountTransactions(accountId);
-            return View(detailModel);
+            detailModel.ListOfTransactions = _accountService.GetAccountTransactions(accountId, skip);
+            if(skip==0)
+            {
+                return View(detailModel);
+            }
+
+            if (detailModel.ListOfTransactions.Count == 0)
+            {
+                ViewBag.Message = "All transactions are now loaded";
+                return PartialView("~/Views/Account/_TransactionView.cshtml");
+
+            }
+            else
+            {
+                //var hejsan = PartialView(@"Account\_TransactionView.cshtml", detailModel.ListOfTransactions);
+                return PartialView("~/Views/Account/_TransactionView.cshtml", detailModel.ListOfTransactions);
+            }
         }
     }
 }

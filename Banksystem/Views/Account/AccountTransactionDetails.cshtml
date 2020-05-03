@@ -2,10 +2,71 @@
 
 <h3>Detailed information</h3>
 
-@foreach (var item in Model.ListOfTransactions)
-{
-    <br />
-    @item.Date
-    @item.Amount
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Transaction date</th>
+            <th scope="col">Type of transaction</th>
+            <th scope="col">Transaction amount</th>
+            <th scope="col">Balance</th>
+        </tr>
+    </thead>
+    <tbody id="hejsan">
+        <partial name="_TransactionView" model=@Model.ListOfTransactions />
+    </tbody>
 
-}
+    
+        
+            
+            
+        
+    
+</table>
+@Html.Hidden("skippy")
+<br />
+<button id="showMore">Show more (20)</button>
+
+<script>
+    $(document).ready(function () {
+        $('#skippy').val(0);
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = window.location.search.substring(1),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+                }
+            }
+        };
+        $('#showMore').on("click", function () {
+            var accountId = getUrlParameter('accountId');
+            let skip = $('#skippy').val();
+            skip = parseInt(skip) + 20;
+            $('#skippy').val(skip);
+            console.log(skip);
+            GetTransactions();
+        });
+
+        function GetTransactions() {
+            let skip = $('#skippy').val();
+            var accountId = getUrlParameter('accountId');
+            $.ajax({
+                type: "POST",
+                url: "/Account/AccountTransactionDetails?accountId=" + accountId + "&skip=" + skip,
+                success: function (data) {
+                    var tables = $('#hejsan').html();
+                    tables += data;
+                    console.log(tables);
+                    $('#hejsan').html(tables);
+                }
+            });
+        }
+        //GetTransactions();
+    });
+
+</script>
