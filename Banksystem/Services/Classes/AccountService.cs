@@ -49,5 +49,15 @@ namespace Banksystem.Services.Classes
         {
             return _accountRepository.GetTransactionsById(accountId, skip);
         }
+
+        public Accounts GetAccountById(int accountId)
+        {
+            return _accountRepository.GetAccountsById(accountId);
+        }
+
+        public decimal GetAccountBalance(int accountId)
+        {
+            return _accountRepository.GetAccountBalance(accountId);
+        }
     }
 }

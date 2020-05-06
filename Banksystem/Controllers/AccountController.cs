@@ -32,7 +32,6 @@ namespace Banksystem.Controllers
             }
             else
             {
-                //var hejsan = PartialView(@"Account\_TransactionView.cshtml", detailModel.ListOfTransactions);
                 return PartialView("~/Views/Account/_TransactionView.cshtml", detailModel.ListOfTransactions);
             }
         }

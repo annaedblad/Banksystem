@@ -9,5 +9,8 @@ namespace Banksystem.Repositories.Interfaces
     public interface ICustomerRepository
     {
         List<Customers> GetCustomers();
+        Customers GetCustomersById(int id);
+
+        Customers GetCustomerByAccountId(int id);
     }
 }

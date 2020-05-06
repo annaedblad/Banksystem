@@ -13,5 +13,9 @@ namespace Banksystem.Services.Interfaces
         Customers GetCustomerById(int id);
 
         List<Customers> GetCustomersByCityOrName(string name, string city);
+
+        Customers GetCustomerByAccountId(int id);
+
+
     }
 }

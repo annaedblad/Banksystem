@@ -25,7 +25,7 @@ namespace Banksystem.Services.Classes
 
         public Customers GetCustomerById(int id)
         {
-            var customer = _customerrepository.GetCustomers().Where(o => o.CustomerId == id).FirstOrDefault();
+            var customer = _customerrepository.GetCustomersById(id);
             return customer;
         }
 
@@ -50,6 +50,11 @@ namespace Banksystem.Services.Classes
            
             return searchResults;
       
+        }
+
+        public Customers GetCustomerByAccountId(int id)
+        {
+            return _customerrepository.GetCustomerByAccountId(id);
         }
     }
 }

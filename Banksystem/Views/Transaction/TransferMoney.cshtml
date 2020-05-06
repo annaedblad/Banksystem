@@ -1,0 +1,57 @@
+﻿@model Banksystem.ViewModels.TransactionViewModel
+
+<h2>Account @Model.AccountId</h2>
+<h4>Owned by @Model.Name</h4>
+<h4>Current balance: @Model.Balance sek</h4>
+
+<br />
+<form asp-controller="Transaction" method="post" asp-action="TransferMoney" asp-for="TransferMoney">
+
+    <label>Operation</label>
+    <select id="selectedOperation" asp-items="@Model.OperationList" asp-for="ChosenOperation"></select>
+    <span asp-validation-for="ChosenOperation"></span>
+    <br /> <br />
+
+    <label>Enter an amount</label>
+    <input type="text" asp-for="TransferAmount" />
+    <span asp-validation-for="TransferAmount"></span>
+    <br /> <br />
+
+
+    <label id="receivingAccountLabel">Enter receiving account number</label>
+    <input id="receivingAccount" type="hidden" asp-for="ReceivingAccount" />
+    <span asp-validation-for="ReceivingAccount"></span>
+    <br /><br />
+
+    <input type="submit" value="Carry out" />
+    <input type="hidden" asp-for="AccountId" value=@Model.AccountId>
+    <input type="hidden" asp-for="Balance" value=@Model.Balance>
+    <input type="hidden" asp-for="Name" value=@Model.Name>
+
+</form>
+
+<br />
+<h3>@ViewBag.Message</h3>
+
+<script>
+    $(document).ready(function () {
+        $('#receivingAccountLabel').hide()
+        $('#selectedOperation').on("change", function () {
+            let operationValue = $('#selectedOperation').val();
+
+            if (operationValue == "Transfer") {
+                $('#receivingAccount').attr("type", "")
+                $('#receivingAccountLabel').show()
+            }
+            else {
+                $('#receivingAccount').attr("type", "hidden")
+                $('#receivingAccountLabel').hide()
+            }
+        });
+    });
+
+</script>
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

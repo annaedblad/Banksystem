@@ -17,9 +17,15 @@ namespace Banksystem.Repositories.Classes
             _bankDBContext = context;
         }
 
+
         public List<Accounts> GetAccounts()
         {
             return _bankDBContext.Accounts.ToList();
+        }  
+        
+        public Accounts GetAccountsById(int id)
+        {
+            return _bankDBContext.Accounts.Where(o => o.AccountId == id).FirstOrDefault();
         }
 
         public IQueryable<Accounts> GetAccountsByCustomerId(int customerId)
@@ -31,6 +37,11 @@ namespace Banksystem.Repositories.Classes
         public List<Transactions> GetTransactionsById(int id, int skip)
         {
             return _bankDBContext.Transactions.Where(x => x.AccountId == id).OrderByDescending(x => x.Date).Skip(skip).Take(20).ToList();
+        }
+
+        public decimal GetAccountBalance(int accountId)
+        {
+            return _bankDBContext.Accounts.Where(x => x.AccountId == accountId).FirstOrDefault().Balance;
         }
     }
 }

@@ -1,12 +1,12 @@
 ﻿@model Banksystem.ViewModels.SearchParametersViewModel
-<h1>Kundbild</h1>
+<h1>Administer customer</h1>
 
 @ViewBag.Message
 
 <form asp-controller="Customer" asp-action="SelectCustomer" asp-for="SelectCustomer" method="post">
-    <label>Ange kundnummer</label>
+    <label>Enter a customer id</label>
     <input type="text" asp-for="CustomerId" />
-    <input type="submit" value="Vidare" />
+    <input type="submit" value="Select" />
     <br />
     <span asp-validation-for="CustomerId"></span>
 </form>

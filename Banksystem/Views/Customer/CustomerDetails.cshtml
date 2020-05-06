@@ -1,6 +1,6 @@
 ﻿@model Banksystem.ViewModels.CustomerDetailsViewModel
 
-<h3>Customer</h3>
+<h3>Customer overview</h3>
 Name: @Model.Givenname @Model.Surname
 <br />
 Gender: @Model.Gender
@@ -12,9 +12,8 @@ Adress: @Model.Streetaddress , @Model.City , @Model.Zipcode , @Model.Country
 Phone: + @Model.CountryCode  @Model.Telephonenumber
 <br />
 Emailadress: @Model.Emailaddress
-<br />
-<h3>Accounts</h3>
-<br />
+<br /><br />
+<h3>Accounts overview</h3>
 
 @foreach (var account in Model.ListOfAccounts)
 {
@@ -22,11 +21,16 @@ Emailadress: @Model.Emailaddress
     <p>Created: @account.Created </p>
     <p>Frequency:  @account.Frequency </p>
     <p>Balance: @account.Balance</p>
+    <br />
     <a asp-controller="Account" asp-action="AccountTransactionDetails" asp-route-accountId="@account.AccountId">
         View details
     </a>
+    <br />
+    <a asp-controller="Transaction" asp-action="TransferMoney" asp-route-accountId="@account.AccountId">
+        Perform transaction on this account
+    </a>
 }
-
+<br />
 <h4>Total balace of all accounts: @Model.TotalBalance</h4>
 
 
