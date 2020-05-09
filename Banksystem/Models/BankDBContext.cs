@@ -1,10 +1,11 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Banksystem.Models
 {
-    public partial class BankDBContext : DbContext
+    public partial class BankDBContext : IdentityDbContext
     {
         public BankDBContext()
         {
@@ -35,6 +36,7 @@ namespace Banksystem.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Accounts>(entity =>
             {
                 entity.HasKey(e => e.AccountId)

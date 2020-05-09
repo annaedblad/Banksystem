@@ -23,14 +23,6 @@ namespace Banksystem.Controllers
             _accountService = account;
             _customerService = customer;
         }
-        public IActionResult Index()
-        {
-            var statistics = new StatisticsViewModel();
-            statistics.AmountOfAccounts = _accountService.TotalAccountAmount();
-            statistics.AmountOfCustomers = _customerService.TotalAmountOfCustomers();
-            statistics.SumOfAccountBalances = _accountService.TotalAccountBalanceSum();
-            return View(statistics);
-        }
 
         public IActionResult SelectCustomer()
         {

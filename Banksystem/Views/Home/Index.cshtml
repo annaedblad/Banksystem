@@ -1,8 +1,15 @@
-﻿@{
+﻿@model Banksystem.ViewModels.StatisticsViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+
+<h1>Antal konton</h1>
+<h2>@Model.AmountOfAccounts</h2>
+<br />
+<h1>Antal kunder</h1>
+<h2>@Model.AmountOfCustomers</h2>
+<br />
+<h1>Total summa av alla bankkonton</h1>
+<h2>@Model.SumOfAccountBalances</h2>
