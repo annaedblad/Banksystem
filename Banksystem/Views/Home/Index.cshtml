@@ -3,11 +3,33 @@
     ViewData["Title"] = "Home Page";
 }
 
-<h1>Antal konton</h1>
-<h2>@Model.AmountOfAccounts</h2>
-<br />
-<h1>Antal kunder</h1>
-<h2>@Model.AmountOfCustomers</h2>
-<br />
-<h1>Total summa av alla bankkonton</h1>
-<h2>@Model.SumOfAccountBalances</h2>
+<div class="container positionStyle">
+    <div class="row">
+        <div class="col-sm borderStyling ">
+            <h3 class="statHeaders">Total Customers</h3>
+            <br />
+            <p class="statText">@Model.AmountOfCustomers</p>
+            <br />
+            <div class="image-container">
+                <img src="~/images/icons8-conference-skin-type-7-48.png" />
+            </div>
+
+        </div>
+        <div class="col-sm borderStyling ">
+            <h3 class="statHeaders">Total Accounts</h3>
+            <br />
+            <p class="statText">@Model.AmountOfAccounts</p>
+            <br />
+            <div class="image-container"> <img src="~/images/icons8-bank-cards-48.png" /></div>
+        </div>
+
+        <div class="col-sm borderStyling ">
+            <h3 class="statHeaders">Total balance</h3>
+            <br />
+            <p class="statText">@Model.SumOfAccountBalances SEK</p>
+            <br />
+            <div class="image-container"><img src="~/images/icons8-coins-48.png" /></div>
+
+        </div>
+    </div>
+</div>
