@@ -24,6 +24,7 @@ namespace Banksystem.Controllers
             _customerService = customer;
         }
 
+        [ResponseCache(Duration = 30, Location = ResponseCacheLocation.Any)]
         public IActionResult Index()
         {
             var statistics = new StatisticsViewModel();
