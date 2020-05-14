@@ -11,13 +11,16 @@ namespace Banksystem.Controllers
     public class AccountController : Controller
     {
         private readonly IAccountService _accountService;
-        public AccountController(IAccountService account)
+        private readonly ICustomerService _customerService;
+        public AccountController(IAccountService account, ICustomerService customer)
         {
             _accountService = account;
+            _customerService = customer;
         }
         public IActionResult AccountTransactionDetails(int accountId, int skip)
         {
             var detailModel = new AccountTransactions();
+            detailModel.CustomerId = _customerService.GetCustomerByAccountId(accountId).CustomerId;
             detailModel.ListOfTransactions = _accountService.GetAccountTransactions(accountId, skip);
             if(skip==0)
             {

@@ -1,41 +1,50 @@
 ﻿@model Banksystem.ViewModels.TransactionViewModel
 
+<br />
 <h2>Account @Model.AccountId</h2>
-<h4>Owned by @Model.Name</h4>
-<h4>Current balance: @Model.Balance sek</h4>
+<h6>Owned by @Model.Name</h6>
+<h6>Current balance: @Model.Balance SEK</h6>
 
 <br />
 <form asp-controller="Transaction" method="post" asp-action="TransferMoney" asp-for="TransferMoney">
 
-    <label>Operation</label>
-    <select id="selectedOperation" asp-items="@Model.OperationList" asp-for="ChosenOperation"></select>
-    <span asp-validation-for="ChosenOperation"></span>
-    <br /> <br />
+    <div class="form-group w-50">
+        <label>Operation</label>
+        <select class="form-control" id="selectedOperation" asp-items="@Model.OperationList" asp-for="ChosenOperation"></select>
+        <span class="text-danger" asp-validation-for="ChosenOperation"></span>
+    </div>
 
-    <label>Enter an amount</label>
-    <input type="text" asp-for="TransferAmount" />
-    <span asp-validation-for="TransferAmount"></span>
-    <br /> <br />
-
+    <div class="form-group w-25">
+        <label>Enter an amount</label>
+        <input id="amountSelection" class="form-control" type="text" asp-for="TransferAmount" />
+        <span class="text-danger" asp-validation-for="TransferAmount"></span>
+    </div>
 
     <label id="receivingAccountLabel">Enter receiving account number</label>
-    <input id="receivingAccount" type="hidden" asp-for="ReceivingAccount" />
-    <span asp-validation-for="ReceivingAccount"></span>
-    <br /><br />
+    <input class="form-control w-25" id="receivingAccount" type="hidden" asp-for="ReceivingAccount" />
+    <span class="text-danger" asp-validation-for="ReceivingAccount"></span>
 
-    <input type="submit" value="Carry out" />
+    <br />
+
+    <input type="submit" value="Carry out" class="btn btn-primary" id="btnn" />
     <input type="hidden" asp-for="AccountId" value=@Model.AccountId>
     <input type="hidden" asp-for="Balance" value=@Model.Balance>
     <input type="hidden" asp-for="Name" value=@Model.Name>
 
+    <a class="btn btn-primary" asp-route-id="@Model.CustomerId" asp-controller="Customer" asp-action="CustomerDetails">Back to Details</a>
+
+
 </form>
 
 <br />
-<h3>@ViewBag.Message</h3>
+<h5>@ViewBag.Message</h5>
 
 <script>
     $(document).ready(function () {
         $('#receivingAccountLabel').hide()
+        $("#amountSelection").val("");
+        $("#receivingAccount").val("");
+        $("#selectedOperation").val("");
         $('#selectedOperation').on("change", function () {
             let operationValue = $('#selectedOperation').val();
 

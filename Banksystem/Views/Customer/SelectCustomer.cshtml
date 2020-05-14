@@ -1,18 +1,21 @@
 ﻿@model Banksystem.ViewModels.SearchParametersViewModel
-<h1>Administer customer</h1>
-
-@ViewBag.Message
+<br />
+<h1>Administer Customers</h1>
 
 <form asp-controller="Customer" asp-action="SelectCustomer" asp-for="SelectCustomer" method="post">
-    <label>Enter a customer id</label>
-    <input type="text" asp-for="CustomerId" />
-    <input type="submit" value="Select" />
+    <div class="form-group w-25">
+        <label>Enter a customer id</label>
+        <input class="form-control" type="text" asp-for="CustomerId" />
+    </div>
+    <input type="submit" value="Select" class="btn btn-primary" />
     <br />
-    <span asp-validation-for="CustomerId"></span>
+    <span class="text-danger" asp-validation-for="CustomerId"></span>
 </form>
+<p class="text-danger">@ViewBag.Message</p>
 
 
 @section Scripts
 {
     <partial name="_ValidationScriptsPartial" />
 }
+

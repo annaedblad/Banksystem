@@ -1,17 +1,19 @@
 ﻿@model Banksystem.ViewModels.SearchParametersViewModel
-
-<h2>Search</h2>
+<br />
+<h2>Search for a Customer</h2>
 
 <form asp-controller="Customer" asp-action="SearchForCustomer" asp-for="SearchForCustomer" method="post">
 
-    <label>Search by name</label>
-    <input type="text" asp-for="Name" />
-    <br />
-    <label>Search by city</label>
-    <input type="text" asp-for="City" />
-    <br />
-    <input type="submit" value="Search" />
-
+    <div class="form-group w-50">
+        <label>Search by Name</label>
+        <input class="form-control" type="text" asp-for="Name" />
+    </div>
+    <div class="form-group w-50">
+        <label>Search by City</label>
+        <input class="form-control" type="text" asp-for="City" />
+    </div>
+    <input type="submit" value="Search" class="btn btn-primary" />
 </form>
 
-@ViewBag.Message
+<br />
+<p class="text-danger">@ViewBag.Message</p>

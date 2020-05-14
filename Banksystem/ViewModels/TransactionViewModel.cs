@@ -13,6 +13,8 @@ namespace Banksystem.ViewModels
 
         public decimal Balance { get; set; }
 
+        public int CustomerId { get; set; }
+
         public string Name { get; set; }
 
         [Required (ErrorMessage = "Field is required")]

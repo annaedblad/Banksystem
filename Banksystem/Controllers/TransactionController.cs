@@ -35,6 +35,7 @@ namespace Banksystem.Controllers
             var transactionModel = new TransactionViewModel
             {
                 AccountId = account.AccountId,
+                CustomerId = customer.CustomerId,
                 Balance = account.Balance,
                 Name = customer.Givenname + " " + customer.Surname,
                 OperationList = LoadOperations(),
@@ -82,12 +83,22 @@ namespace Banksystem.Controllers
                     }
                     else
                     {
+                        var receiver = _customerService.GetCustomerByAccountId(Convert.ToInt32(model.ReceivingAccount));
+
+                        if (receiver == null)
+                        {
+                            ViewBag.Message = "Operation failed: An account with the id " + model.ReceivingAccount + " cannot be found";
+                            model.OperationList = LoadOperations();
+                            return View(model);
+                        }
+
                         var receiverBalance = _accountService.GetAccountBalance(Convert.ToInt32(model.ReceivingAccount));
                         _transactionService.CreateTransferTransaction(model.AccountId, Convert.ToInt32(model.ReceivingAccount), model.TransferAmount, model.Balance, receiverBalance);
-                        var receiver = _customerService.GetCustomerByAccountId(Convert.ToInt32(model.ReceivingAccount));
+                       
                         ViewBag.Message = model.TransferAmount + " sek has now been transfered to account " + model.ReceivingAccount + " owned by " + receiver.Givenname + " " + receiver.Surname;
                         model.OperationList = LoadOperations();
                         model.Balance = _accountService.GetAccountBalance(model.AccountId);
+                        model.CustomerId = model.CustomerId;
                         return View(model);
                     }
                 }
@@ -95,6 +106,7 @@ namespace Banksystem.Controllers
             ViewBag.Message = "Operation has been carried out";
             model.OperationList = LoadOperations();
             model.Balance = _accountService.GetAccountBalance(model.AccountId);
+            model.CustomerId = _customerService.GetCustomerByAccountId(model.AccountId).CustomerId;
             return View(model);
         }
 

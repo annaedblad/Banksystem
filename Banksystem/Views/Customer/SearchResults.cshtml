@@ -2,7 +2,7 @@
 @using X.PagedList;
 @using X.PagedList.Mvc.Core.Common
 @model IEnumerable<Banksystem.ViewModels.SearchParametersViewModel>
-
+<br />
 <h1>Search results</h1>
 
 @Html.PagedListPager((IPagedList)Model, page => Url.Action("SearchResults", new { page = page }),
@@ -35,7 +35,7 @@ PageClasses = new[] { "page-link" },
                 <td>@person.Adress</td>
                 <td>@person.NationalId</td>
                 <td>
-                    <a asp-controller="Customer" asp-action="CustomerDetails" asp-route-id="@person.CustomerId">
+                    <a asp-controller="Customer" asp-action="CustomerDetails" asp-route-id="@person.CustomerId" class="btn btn-primary">
                         View
                     </a>
                 </td>

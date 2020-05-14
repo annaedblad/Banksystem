@@ -5,7 +5,7 @@
 
 <div class="container positionStyle">
     <div class="row">
-        <div class="col-sm borderStyling ">
+        <div class="col-sm borderStylingLeft borderStylingRight ">
             <h3 class="statHeaders">Total Customers</h3>
             <br />
             <p class="statText">@Model.AmountOfCustomers</p>
@@ -15,7 +15,7 @@
             </div>
 
         </div>
-        <div class="col-sm borderStyling ">
+        <div class="col-sm borderStylingRight ">
             <h3 class="statHeaders">Total Accounts</h3>
             <br />
             <p class="statText">@Model.AmountOfAccounts</p>
@@ -23,13 +23,17 @@
             <div class="image-container"> <img src="~/images/icons8-bank-cards-48.png" /></div>
         </div>
 
-        <div class="col-sm borderStyling ">
+        <div class="col-sm borderStylingRight ">
             <h3 class="statHeaders">Total balance</h3>
             <br />
             <p class="statText">@Model.SumOfAccountBalances SEK</p>
             <br />
             <div class="image-container"><img src="~/images/icons8-coins-48.png" /></div>
-
         </div>
+        <br /><br />
+            <div>
+                <img class="centerBottomPic" src="~/images/secondHeader.jpg" />
+            </div>
+
     </div>
 </div>

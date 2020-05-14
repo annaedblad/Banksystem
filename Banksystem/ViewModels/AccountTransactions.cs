@@ -9,5 +9,7 @@ namespace Banksystem.ViewModels
     public class AccountTransactions
     {
         public List<Transactions> ListOfTransactions { get; set; }
+
+        public int CustomerId { get; set; }
     }
 }

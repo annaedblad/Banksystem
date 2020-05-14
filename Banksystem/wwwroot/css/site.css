@@ -1,4 +1,6 @@
-﻿/*--StartPage--*/
+﻿
+/*--StartPage--*/
+
 .statHeaders {
     color: #1D530F;
     text-align: center;
@@ -6,12 +8,8 @@
 }
 
 .positionStyle {
-    padding-top: 50px;
+    padding-top: 70px;
 }
-
-/*.borderStyling {
-    border: 1px solid grey;
-}*/
 
 .statText {
     text-align: center;
@@ -24,8 +22,46 @@
     justify-content: center;
 }
 
+.center {
+    text-align: center;
+    color: #424242;
+}
+
+.centerBottomPic {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    margin-top: 70px;
+}
+
+.borderStylingRight {
+    border-right: 2px solid black;
+}
+
+.borderStylingLeft {
+    border-left: 2px solid black;
+}
+/*--Administer Users--*/
+
+.centerText {
+    text-align: center;
+}
+
+.centerImage {
+    display: block;
+    margin: 0 auto;
+}
+
+/*--CustomerDetails--*/
+
+.tableHeader {
+    color: #1D530F;
+}
+
+/*--Footer--*/
+
 #footer {
-    margin-top: 1500px;
     position: fixed;
     bottom: 0;
 }
