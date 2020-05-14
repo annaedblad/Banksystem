@@ -48,6 +48,8 @@ namespace Banksystem.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult TransferMoney(TransactionViewModel model)
         {
+            var customerId = _customerService.GetCustomerByAccountId(model.AccountId).CustomerId;
+
             if (model.ChosenOperation != "Transfer")
             {
                 ModelState.Remove("ReceivingAccount");
@@ -65,6 +67,7 @@ namespace Banksystem.Controllers
                     {
                         ViewBag.Message = "Operation failed: Withdrawal amount can't be larger than the balance";
                         model.OperationList = LoadOperations();
+                        model.CustomerId = customerId;
                         return View(model);
                     }
                     else
@@ -79,8 +82,18 @@ namespace Banksystem.Controllers
                     {
                         ViewBag.Message = "Operation failed: Transaction amount can't be larger than the balance";
                         model.OperationList = LoadOperations();
+                        model.CustomerId = customerId;
                         return View(model);
                     }
+
+                    else if (model.AccountId == model.ReceivingAccount)
+                    {
+                        ViewBag.Message = "Operation failed: You cannot transfer money to the same account you are trying to transfer money from";
+                        model.OperationList = LoadOperations();
+                        model.CustomerId = customerId;
+                        return View(model);
+                    }
+
                     else
                     {
                         var receiver = _customerService.GetCustomerByAccountId(Convert.ToInt32(model.ReceivingAccount));
@@ -89,16 +102,17 @@ namespace Banksystem.Controllers
                         {
                             ViewBag.Message = "Operation failed: An account with the id " + model.ReceivingAccount + " cannot be found";
                             model.OperationList = LoadOperations();
+                            model.CustomerId = customerId;
                             return View(model);
                         }
 
                         var receiverBalance = _accountService.GetAccountBalance(Convert.ToInt32(model.ReceivingAccount));
                         _transactionService.CreateTransferTransaction(model.AccountId, Convert.ToInt32(model.ReceivingAccount), model.TransferAmount, model.Balance, receiverBalance);
-                       
+
                         ViewBag.Message = model.TransferAmount + " sek has now been transfered to account " + model.ReceivingAccount + " owned by " + receiver.Givenname + " " + receiver.Surname;
                         model.OperationList = LoadOperations();
                         model.Balance = _accountService.GetAccountBalance(model.AccountId);
-                        model.CustomerId = model.CustomerId;
+                        model.CustomerId = customerId;
                         return View(model);
                     }
                 }
@@ -106,7 +120,7 @@ namespace Banksystem.Controllers
             ViewBag.Message = "Operation has been carried out";
             model.OperationList = LoadOperations();
             model.Balance = _accountService.GetAccountBalance(model.AccountId);
-            model.CustomerId = _customerService.GetCustomerByAccountId(model.AccountId).CustomerId;
+            model.CustomerId = customerId;
             return View(model);
         }
 
