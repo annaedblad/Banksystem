@@ -22,11 +22,12 @@
                 <a class="nav-link text-dark" asp-controller="Admin" asp-action="Index" title="Admin"><i class="fa fa-user-o"></i> Administer Users</a>
             </li>
         }
-        <li class="nav-item">
-            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button id="logout" type="submit" class="nav-link btn btn-link text-dark"><b>Logout</b></button>
-            </form>
-        </li>
+<li class="nav-item">
+    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+        <a id="logout" class="nav-link text-dark">Logout</a>
+    </form>
+
+</li>
     }
     else
     {
