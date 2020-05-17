@@ -22,12 +22,13 @@
                 <a class="nav-link text-dark" asp-controller="Admin" asp-action="Index" title="Admin"><i class="fa fa-user-o"></i> Administer Users</a>
             </li>
         }
-<li class="nav-item">
-    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-        <a id="logout" class="nav-link text-dark">Logout</a>
-    </form>
+        <li class="nav-item">
+            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <a style="cursor:pointer" id="logout" class="nav-link text-dark">Logout</a>
+            </form>
+        </li>
 
-</li>
+
     }
     else
     {
@@ -35,7 +36,15 @@
             <a class="nav-link text-dark " asp-area="Identity" asp-page="/Account/Login">Login</a>
         </li>
     }
-
-
-
 </ul>
+
+
+<script>
+    $(document).ready(function () {
+        console.log("ready");
+        $('#logout').on("click", function () {
+            console.log("readysdas");
+            $('#logoutForm').submit();
+        });
+    });
+</script>

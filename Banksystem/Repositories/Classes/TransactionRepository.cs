@@ -17,7 +17,7 @@ namespace Banksystem.Repositories.Classes
 
         public void CreateDepositTransaction(int accountId, decimal balance, decimal transferAmount)
         {
-            if (transferAmount < 0)
+            if (transferAmount <= 0)
             {
                 throw new InvalidOperationException();
             }
@@ -40,7 +40,7 @@ namespace Banksystem.Repositories.Classes
 
         public void CreateWithdrawalTransaction(int accountId, decimal balance, decimal transferAmount)
         {
-            if (transferAmount > balance || transferAmount < 0)
+            if (transferAmount > balance || transferAmount <= 0)
             {
                 throw new InvalidOperationException();
             }
@@ -62,7 +62,7 @@ namespace Banksystem.Repositories.Classes
         public void CreateTransferTransaction(int fromAccount, int toAccount, decimal transferAmount, decimal fromBalance, decimal toBalance)
         {
 
-            if (transferAmount > fromBalance || transferAmount < 0)
+            if (transferAmount > fromBalance || transferAmount <= 0)
             {
                 throw new InvalidOperationException();
             }
