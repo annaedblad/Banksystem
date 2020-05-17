@@ -6,9 +6,11 @@
         <div class="col-sm borderStylingRight borderStylingLeft ">
             <h3 class="statHeaders">Customer overview</h3>
             <br />
+            <p><b>Customer id: </b>@Model.CustomerId</p>
             <p><b>Name: </b> @Model.Givenname @Model.Surname</p>
             <p><b>Gender: </b>@Model.Gender[0].ToString().ToUpper()@Model.Gender.Substring(1, Model.Gender.Length - 1)</p>
             <p><b>Birthday: </b>@Convert.ToDateTime(Model.Birthday).ToShortDateString()</p>
+            <p><b>National identification number: </b>@Model.NationalId</p>
             <p><b>Adress: </b>@Model.Streetaddress , @Model.City , @Model.Zipcode , @Model.Country</p>
             <p><b>Phone: </b>+ @Model.CountryCode  @Model.Telephonenumber</p>
             <p><b>Emailadress: </b>@Model.Emailaddress</p>
@@ -22,16 +24,16 @@
                 <p><b>Account number: </b> @account.AccountId </p>
                 <p><b>Created: </b> @Convert.ToDateTime(account.Created).ToShortDateString() </p>
                 <p><b>Frequency:</b>  @account.Frequency </p>
-                <p><b>Balance:</b> @account.Balance</p>
+                <p><b>Balance:</b> @account.Balance SEK</p>
                 <a asp-controller="Account" asp-action="AccountTransactionDetails" asp-route-accountId="@account.AccountId" class="btn btn-success">
                     View transactions
                 </a>
                 <a asp-controller="Transaction" asp-action="TransferMoney" asp-route-accountId="@account.AccountId" class="btn btn-info">
                     Perform transaction
                 </a>
+                <hr style="color:gray;background-color:gray">
             }
-            <br /><br />
-            <p><b>Total balace of all accounts: </b>@Model.TotalBalance</p>
+            <p><b>Total balace of all accounts: </b>@Model.TotalBalance SEK</p>
         </div>
 
     </div>

@@ -22,6 +22,7 @@ namespace Banksystem.Controllers
             var detailModel = new AccountTransactions();
             detailModel.CustomerId = _customerService.GetCustomerByAccountId(accountId).CustomerId;
             detailModel.ListOfTransactions = _accountService.GetAccountTransactions(accountId, skip);
+            detailModel.AccountId = accountId;
             if(skip==0)
             {
                 return View(detailModel);
@@ -35,7 +36,7 @@ namespace Banksystem.Controllers
             }
             else
             {
-                return PartialView("~/Views/Account/_TransactionView.cshtml", detailModel.ListOfTransactions);
+                return PartialView("~/Views/Account/_TransactionView.cshtml", detailModel);
             }
         }
     }

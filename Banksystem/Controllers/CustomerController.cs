@@ -61,7 +61,7 @@ namespace Banksystem.Controllers
                 return View();
             }
             var result = _customerService.GetCustomersByCityOrName(model.Name, model.City);
-          
+
 
             var resultViewModel = new List<SearchParametersViewModel>();
             foreach (var item in result)
@@ -80,7 +80,7 @@ namespace Banksystem.Controllers
             return View("SearchResults", resultViewModel.ToPagedList(1, pageSize));
         }
 
-        public IActionResult SearchResults (int? page)
+        public IActionResult SearchResults(int? page)
         {
             var jsonSearchResult = HttpContext.Session.GetString("SearchResults");
             var searchResults = JsonConvert.DeserializeObject<List<SearchParametersViewModel>>(jsonSearchResult);
@@ -119,9 +119,20 @@ namespace Banksystem.Controllers
                 Gender = customer.Gender,
                 Country = customer.Country,
                 TotalBalance = accounts.TotalBalance,
-                ListOfAccounts = accounts.ListOfAccounts
+                ListOfAccounts = accounts.ListOfAccounts,
+                CustomerId = customer.CustomerId,
             };
+
+            if (customer.NationalId == "")
+            {
+                customerModel.NationalId = "Information missing";
+            }
+            else
+            {
+                customerModel.NationalId = customer.NationalId;
+            }
+
             return customerModel;
         }
-    }
+}
 }

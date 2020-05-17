@@ -11,5 +11,7 @@ namespace Banksystem.ViewModels
         public List<Transactions> ListOfTransactions { get; set; }
 
         public int CustomerId { get; set; }
+
+        public int AccountId { get; set; }
     }
 }

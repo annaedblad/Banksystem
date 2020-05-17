@@ -1,5 +1,6 @@
 ﻿@model Banksystem.ViewModels.AccountTransactions
 <br />
+<h3>Account @Model.AccountId</h3>
 
 <table class="table">
     <thead>
@@ -11,7 +12,7 @@
         </tr>
     </thead>
     <tbody id="hejsan">
-        <partial name="_TransactionView" model=@Model.ListOfTransactions />
+        <partial name="_TransactionView" model=@Model />
     </tbody>
 </table>
 @Html.Hidden("skippy")

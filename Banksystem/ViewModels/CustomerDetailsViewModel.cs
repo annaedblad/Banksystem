@@ -20,6 +20,8 @@ namespace Banksystem.ViewModels
         public string CountryCode { get; set; }
         public int CustomerId { get; set; }
 
+        public string NationalId { get; set; }
+
         public string Gender { get; set; }
 
         public string Country { get; set; }

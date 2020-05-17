@@ -1,4 +1,4 @@
-﻿@model List<Transactions>
+﻿@model Banksystem.ViewModels.AccountTransactions
 
 @if (Model == null)
 {
@@ -9,7 +9,7 @@
 
 else
 {
-    @foreach (var item in Model)
+    @foreach (var item in Model.ListOfTransactions)
     {
         <tr>
             <td>@Convert.ToDateTime(item.Date).ToShortDateString()</td>
